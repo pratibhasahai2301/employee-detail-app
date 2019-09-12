@@ -1,17 +1,18 @@
 import {call, cancel, cancelled, fork, put, take} from 'redux-saga/effects';
 import {ActionTypes} from '../constants/Actions';
-import {authenticate} from '../actions/login.actions';
+import {authenticate} from '../mockApis/login.api';
+import {deleteToken, loginCanceled, loginError, loginSuccess, saveToken} from '../actions/login.action';
 
 export function* authorize(email, password) {
   try {
     const result = yield call(authenticate, email, password);
-    yield put({type: ActionTypes.LOGIN_SUCCESS});
-    yield put({type: ActionTypes.SAVE_TOKEN, payload: result});
+    yield put(loginSuccess());
+    yield put(saveToken(result));
   } catch (error) {
-    yield put({type: ActionTypes.LOGIN_ERROR, error});
+    yield put(loginError(error));
   } finally {
     if (yield cancelled()) {
-      yield put({type: ActionTypes.LOGIN_CANCELLED});
+      yield put(loginCanceled());
     }
   }
 }
@@ -23,7 +24,7 @@ export function* loginFlow() {
     const action = yield take([ActionTypes.LOGOUT, ActionTypes.LOGIN_ERROR]);
     if (action.type === ActionTypes.LOGOUT) {
       yield cancel(task);
-      yield put({type: ActionTypes.DELETE_TOKEN});
+      yield put(deleteToken());
     }
   }
 }
@@ -32,7 +33,7 @@ export function* logoutFlow() {
   while (true) {
     const action = yield take([ActionTypes.LOGOUT, ActionTypes.LOGIN_ERROR]);
     if (action.type === ActionTypes.LOGOUT) {
-      yield put({type: ActionTypes.DELETE_TOKEN});
+      yield put(deleteToken());
     }
   }
 }

@@ -1,14 +1,15 @@
 import {takeLatest, put, call} from 'redux-saga/effects';
-import {LoadAllEmployees} from '../../actions/employee.action';
+import {LoadAllEmployees} from '../../mockApis/employee.api';
 import {ActionTypes} from '../../constants/Actions';
+import {fetchEmployeesFailure, fetchEmployeesPending, fetchEmployeesSuccess} from '../../actions/employee.action';
 
-function* fetchEmployees() {
-  yield put({type: 'FETCH_EMPLOYEES_PENDING'});
+export function* fetchEmployees() {
+  yield put(fetchEmployeesPending());
   try {
     const employees = yield call(LoadAllEmployees);
-    yield put({type: ActionTypes.FETCH_EMPLOYEES_SUCCESS, payload: employees});
+    yield put(fetchEmployeesSuccess(employees));
   } catch (error) {
-    yield put({type: ActionTypes.FETCH_EMPLOYEES_FAILURE, error: 'Error occurred while fetching data'});
+    yield put(fetchEmployeesFailure('Error occurred while fetching data'));
   }
 }
 

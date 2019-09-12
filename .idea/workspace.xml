@@ -21,7 +21,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ReactReduxTestingUsingJestEnzyme" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -31,8 +31,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\react\employee-detail-app\src\sagas\loginSaga" />
+      <recent name="D:\react\employee-detail-app\src\mockApis" />
+      <recent name="D:\react\employee-detail-app\src\reducers" />
+      <recent name="D:\react\employee-detail-app\src" />
       <recent name="D:\react\employee-detail-app\src\shared\components\SharedTableHead" />
-      <recent name="D:\react\employee-detail-app\src\components" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\react\employee-detail-app\src" />

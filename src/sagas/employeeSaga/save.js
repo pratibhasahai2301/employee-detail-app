@@ -1,15 +1,16 @@
 import {takeLatest, put, call} from 'redux-saga/effects';
 import {ActionTypes} from '../../constants/Actions';
-import {saveEmployeeDetails} from '../../actions/employee.action';
+import {saveEmployeeDetails} from '../../mockApis/employee.api';
+import {saveEmployeeFailure, saveEmployeePending, saveEmployeeSuccess} from '../../actions/employee.action';
 
 function* saveEmployee(action) {
-  yield put({type: ActionTypes.SAVE_EMPLOYEE_PENDING});
+  yield put(saveEmployeePending());
 
   try {
     const response = yield call(saveEmployeeDetails, action.employee);
-    yield put({type: ActionTypes.SAVE_EMPLOYEE_SUCCESS, payload: response});
+    yield put(saveEmployeeSuccess(response));
   } catch (error) {
-    yield put({type: ActionTypes.SAVE_EMPLOYEE_FAILURE, error});
+    yield put(saveEmployeeFailure(error));
   }
 }
 

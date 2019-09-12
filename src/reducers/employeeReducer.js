@@ -43,7 +43,7 @@ const employeeReducer = (state = initialState, action) => {
     case ActionTypes.DELETE_EMPLOYEE_SUCCESS : {
       return {
         ...state,
-        employees: action.result,
+        employees: action.payload,
         status: 'Employee Deleted Successfully',
         error: null
       };

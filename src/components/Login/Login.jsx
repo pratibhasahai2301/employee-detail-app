@@ -42,7 +42,7 @@ const Login = (props) => {
     });
   };
 
-  const login = () => {
+  const onLoginClick = () => {
     let {email, password} = state;
     props.login(email, password);
   };
@@ -76,9 +76,8 @@ const Login = (props) => {
               <div className="form-group">
                 <Button variant="contained"
                         color="primary"
-                        type="submit"
                         className={classes.button}
-                onClick={login}>
+                        onClick={onLoginClick}>
                   Login
                 </Button>
               </div>
@@ -102,7 +101,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: (email, password) => dispatch({type: ActionTypes.LOGIN_REQUEST, email, password}),
+    login: (email, password) => dispatch({type: ActionTypes.LOGIN_REQUEST, email, password})
   };
 };
 
