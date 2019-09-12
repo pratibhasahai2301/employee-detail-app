@@ -37,7 +37,7 @@ const userReducer = (state = initialState, action) => {
     case ActionTypes.LOGIN_ERROR: {
       newState = {
         ...state,
-        loginInfo: {status: LOGIN_ERROR, user: null},
+        loginInfo: {status: LOGIN_ERROR},
         loginError: 'Invalid username/password',
       };
       return newState;

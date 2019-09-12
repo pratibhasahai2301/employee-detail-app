@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link, NavLink} from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -40,31 +40,57 @@ const StyledAppBar = withStyles(theme => ({
   }
 }))(AppBar);
 
-const NavBar = (props) => {
+const LoginButton = () => {
+  const classes = useStyles();
+  return (
+    <React.Fragment>
+      <React.Fragment>
+        <NavLink to='/login' className={classes.link}>Login</NavLink>
+        <LockOpenIcon className={classes.icon}/>
+      </React.Fragment>
+    </React.Fragment>
+  );
+};
+
+const LogoutButton = (props) => {
   const classes = useStyles();
   const userName = localStorage.getItem('userLoggedIn') ?
     JSON.parse(localStorage.getItem('userLoggedIn'))['name'] : '';
+  return (
+    <div className={classes.container}>
+      <div className={classes.userProfile}>
+        <b>Welcome {userName}!</b>
+      </div>
+      <div className={classes.logoutButton}
+           onClick={props.onClick}>
+        <span className={classes.link}>Logout</span>
+        <ExitToAppIcon />
+      </div>
+    </div>
+  );
+};
+
+const NavBar = (props) => {
+  const classes = useStyles();
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('login_token') !== null);
 
   const handleLogout = () => {
+    setIsLoggedIn(false);
     props.handleLogout();
   };
 
-  /*const getNavBarLink = () => {
-    const userName = localStorage.getItem('userLoggedIn') ?
-      JSON.parse(localStorage.getItem('userLoggedIn'))['name'] : '';
-    if (localStorage.getItem('login_token')) {
+  const getNavBarLinks = () => {
+    if (isLoggedIn || localStorage.getItem('login_token')) {
       return (
-
-      );
+        <LogoutButton onClick={handleLogout}/>
+      )
     } else {
       return (
-        <React.Fragment>
-          <NavLink to='/login' className={classes.link}>Login</NavLink>
-          <LockOpenIcon className={classes.icon}/>
-        </React.Fragment>
-      );
+        <LoginButton />
+      )
     }
-  };*/
+  };
+
   return(
     <div>
       <StyledAppBar position="static">
@@ -73,16 +99,7 @@ const NavBar = (props) => {
             <Link to='/' className={classes.link}>Employee MS</Link>
           </Typography>
           <div className={classes.list}>
-            <div className={classes.container}>
-              <div className={classes.userProfile}>
-                <b>Welcome {userName}!</b>
-              </div>
-              <div className={classes.logoutButton}
-                   onClick={handleLogout}>
-                <span className={classes.link}>Logout</span>
-                <ExitToAppIcon />
-              </div>
-            </div>
+            {getNavBarLinks()}
           </div>
         </Toolbar>
       </StyledAppBar>

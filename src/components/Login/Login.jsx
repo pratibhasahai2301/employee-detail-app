@@ -42,7 +42,8 @@ const Login = (props) => {
     });
   };
 
-  const login = () => {
+  const onSubmit = () => {
+    console.log('login');
     let {email, password} = state;
     props.login(email, password);
   };
@@ -57,6 +58,7 @@ const Login = (props) => {
             <h2>Login</h2>
             <span className={classes.error}>{props.error}</span>
             <form name="form"
+                  onSubmit={onSubmit}
                   className={classes.container}>
               <div className="form-group">
                 <TextField label="Email"
@@ -77,8 +79,7 @@ const Login = (props) => {
                 <Button variant="contained"
                         color="primary"
                         type="submit"
-                        className={classes.button}
-                onClick={login}>
+                        className={classes.button}>
                   Login
                 </Button>
               </div>
