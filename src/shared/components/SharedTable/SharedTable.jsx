@@ -151,7 +151,6 @@ const SharedTable = (props) => {
   }
 
   function handleRequestSort(event, property) {
-    console.log('handle request sort');
     setRowBeingEdited(null);
     // revert any changes made while editing
     if (JSON.stringify(props.data) !== JSON.stringify(employeeData)) {

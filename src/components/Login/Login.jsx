@@ -42,8 +42,7 @@ const Login = (props) => {
     });
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const login = () => {
     let {email, password} = state;
     props.login(email, password);
   };
@@ -58,8 +57,7 @@ const Login = (props) => {
             <h2>Login</h2>
             <span className={classes.error}>{props.error}</span>
             <form name="form"
-                  className={classes.container}
-                  onSubmit={onSubmit}>
+                  className={classes.container}>
               <div className="form-group">
                 <TextField label="Email"
                            className={classes.textField}
@@ -79,7 +77,8 @@ const Login = (props) => {
                 <Button variant="contained"
                         color="primary"
                         type="submit"
-                        className={classes.button}>
+                        className={classes.button}
+                onClick={login}>
                   Login
                 </Button>
               </div>

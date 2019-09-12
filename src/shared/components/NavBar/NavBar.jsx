@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles, withStyles} from "@material-ui/core";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(theme => ({
   link: {
@@ -43,19 +42,19 @@ const StyledAppBar = withStyles(theme => ({
 
 const NavBar = (props) => {
   const classes = useStyles();
-  const getNavBarLink = () => {
-    if (props.token) {
+  const userName = localStorage.getItem('userLoggedIn') ?
+    JSON.parse(localStorage.getItem('userLoggedIn'))['name'] : '';
+
+  const handleLogout = () => {
+    props.handleLogout();
+  };
+
+  /*const getNavBarLink = () => {
+    const userName = localStorage.getItem('userLoggedIn') ?
+      JSON.parse(localStorage.getItem('userLoggedIn'))['name'] : '';
+    if (localStorage.getItem('login_token')) {
       return (
-        <div className={classes.container}>
-          <div className={classes.userProfile}>
-            Welcome <b>{props.userName}!</b>
-          </div>
-          <div className={classes.logoutButton}
-               onClick={()=>props.handleLogout()}>
-            <span className={classes.link}>Logout</span>
-            <ExitToAppIcon />
-          </div>
-        </div>
+
       );
     } else {
       return (
@@ -65,7 +64,7 @@ const NavBar = (props) => {
         </React.Fragment>
       );
     }
-  };
+  };*/
   return(
     <div>
       <StyledAppBar position="static">
@@ -74,18 +73,21 @@ const NavBar = (props) => {
             <Link to='/' className={classes.link}>Employee MS</Link>
           </Typography>
           <div className={classes.list}>
-            {getNavBarLink()}
+            <div className={classes.container}>
+              <div className={classes.userProfile}>
+                <b>Welcome {userName}!</b>
+              </div>
+              <div className={classes.logoutButton}
+                   onClick={handleLogout}>
+                <span className={classes.link}>Logout</span>
+                <ExitToAppIcon />
+              </div>
+            </div>
           </div>
         </Toolbar>
       </StyledAppBar>
     </div>
   )
-};
-
-NavBar.propTypes = {
-  token: PropTypes.string,
-  userName: PropTypes.string,
-  handleLogout: PropTypes.func,
 };
 
 export default NavBar;

@@ -24,14 +24,14 @@ const userReducer = (state = initialState, action) => {
       return newState;
     }
     case ActionTypes.DELETE_TOKEN: {
-      newState = {...state, loginInfo: {...state.loginInfo, token: null}, loginError: null};
+      newState = {...state, loginInfo: {...state.loginInfo, token: null, user: null}, loginError: null};
       localStorage.removeItem('login_token');
       localStorage.removeItem('userLoggedIn');
       newState.token = null;
       return newState;
     }
     case ActionTypes.LOGOUT: {
-      newState = {...state, loginInfo: {...state.loginInfo, status: LOGGED_OUT, user: null}, loginError: null};
+      newState = {...state, loginInfo: {...state.loginInfo, token: null, status: LOGGED_OUT, user: null}, loginError: null};
       return newState;
     }
     case ActionTypes.LOGIN_ERROR: {

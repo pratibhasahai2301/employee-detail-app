@@ -48,7 +48,6 @@ const EmployeeList = props => {
   const dialog = getDialogInfo();
   const defaultSortOrderField = 'FirstName';
   const defaultSortOrder = 'desc';
-  const [isLoading, setIsLoading] = useState(false);
   const [redirectToAddEmployee, setRedirectToAddEmployee] = useState(false);
   const [employeeData, setEmployeeData] = useState([]);
 
@@ -62,13 +61,11 @@ const EmployeeList = props => {
   useEffect(() => {
     if (employeeData.length === 0) {
       props.fetchEmployees();
-      setIsLoading(true);
     }
     if (props.employees.length) {
       setEmployeeData(props.employees);
-      setIsLoading(false);
     }
-  }, [employeeData, props, isLoading]);
+  }, [employeeData, props.employees]);
 
   const onHandleSave = (employee) => {
     props.saveEmployee(employee);

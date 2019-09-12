@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {toast, ToastContainer} from 'react-toastify';
 import {Switch, Route} from 'react-router-dom';
@@ -13,9 +13,6 @@ import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = (props) => {
-  const token = localStorage.getItem('login_token');
-  const userLoggedIn = JSON.parse(localStorage.getItem('userLoggedIn'));
-  const userName = userLoggedIn ? userLoggedIn['name'] : '';
   const onHandleLogout = () => {
     props.logout();
   };
@@ -32,37 +29,22 @@ const App = (props) => {
     }
   });
 
-  const getLogin = () => {
-    if (localStorage.getItem('login_token')) {
-      return (
-        <Switch>
-          <Route exact path={Routes.Root} component={Login}/>
-          <Route path={Routes.Login} component={Login}/>
-          <Route path={Routes.Employees} component={EmployeeList}/>
-          <Route path={Routes.EmployeeDetail} component={EmployeeDetail}/>
-          <Route path={Routes.EmployeeDetailAdd} component={EmployeeDetail}/>
-        </Switch>
-      );
-    } else {
-      return (
-        <Login/>
-      );
-    }
-  };
-
   return (
     <div className="App">
-      <NavBar handleLogout={onHandleLogout}
-              token={token}
-              userName={userName}/>
+      <NavBar handleLogout={onHandleLogout}/>
       <main>
         <div className='container dashboard'>
-          {getLogin()}
+          <Switch>
+            <Route exact path={Routes.Root} component={Login}/>
+            <Route path={Routes.Login} component={Login}/>
+            <Route path={Routes.Employees} component={EmployeeList}/>
+            <Route path={Routes.EmployeeDetail} component={EmployeeDetail}/>
+            <Route path={Routes.EmployeeDetailAdd} component={EmployeeDetail}/>
+          </Switch>
+          <ToastContainer/>
         </div>
-        <ToastContainer/>
       </main>
     </div>
-
   );
 };
 
