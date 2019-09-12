@@ -7,7 +7,6 @@ import {makeStyles, withStyles} from "@material-ui/core";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import PropTypes from 'prop-types';
-import SharedTable from '../SharedTable/SharedTable';
 
 const useStyles = makeStyles(theme => ({
   link: {

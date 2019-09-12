@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App = (props) => {
   const token = localStorage.getItem('login_token');
-  const userLoggedIn = localStorage.getItem('userLoggedIn');
+  const userLoggedIn = JSON.parse(localStorage.getItem('userLoggedIn'));
   const userName = userLoggedIn ? userLoggedIn['name'] : '';
   const onHandleLogout = () => {
     props.logout();

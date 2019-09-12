@@ -97,7 +97,7 @@ const EmployeeEdit = props => {
 
   const onSave = (event) => {
     setErrorMessage({});
-    let message = {...errorMessage};
+    let message = {};
     if (!employee.FirstName) {
       message = {...message, FirstName: 'This field is required'};
     }

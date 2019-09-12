@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
+import {Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+
 import {makeStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import './Login.css';
-import {Redirect} from 'react-router-dom';
-import {connect} from 'react-redux';
+
 import {ActionTypes} from '../../constants/Actions';
+import './Login.css';
 
 const useStyles = makeStyles(theme => ({
   container: {
